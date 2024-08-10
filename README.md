@@ -35,71 +35,80 @@ The Car Service Appointment Booking Application is a comprehensive web-based sol
 ## Getting Started
 
 ### Running the Application Locally
-
-1. **Create Project Directory:**
+1. Create Project Directory:
    ```bash
    mkdir springboot
    cd springboot
 
-2.Clone the Repository:
-git clone https://github.com/sandeep-kalasgonda/updated-project.git
-cd updated-project
+2. Clone the Repository:
+   ```bash
+    git clone https://github.com/sandeep-kalasgonda/updated-project.git
+    cd updated-project bash
+   
+3. Check Java Version:
+    nsure Java 17 is installed:
+   ```bash
+      java -version
 
-3.Check Java Version:
-Ensure Java 17 is installed:
-java -version
+4. Install Apache Maven:
+   Install Maven if it's not already installed.
 
-4.Install Apache Maven:
-Install Maven if it's not already installed.
+5. Configure the Application:
 
-5.Configure the Application:
+   Open src/main/resources/application.properties.
+   Configure the database settings for PostgreSQL:
+   spring.datasource.url=jdbc:postgresql://localhost:5432/car
+   spring.datasource.username=<your-username>
+   spring.datasource.password=<your-password>
 
-Open src/main/resources/application.properties.
-Configure the database settings for PostgreSQL:
-spring.datasource.url=jdbc:postgresql://localhost:5432/car
-spring.datasource.username=<your-username>
-spring.datasource.password=<your-password>
+6. Run the Application:
+   ```bash
+   mvn clean package
+   This will create a WAR file in the target/ directory.
 
-6.Run the Application:
-  mvn clean package
-This will create a WAR file in the target/ directory.
+7. Start the Application:
 
-7.Start the Application:
-
-Open src/main/java/com/example/CarServiceApplication.java.
-Run the main function to start the application.
-Access the application at http://localhost:8080.
+   Open src/main/java/com/example/CarServiceApplication.java.
+   Run the main function to start the application.
+   Access the application at http://localhost:8080.
 
 
 
 
 
 
-### Deploying on AWS EC2 with Tomcat
-1.Clone the Repository on EC2:
-git clone https://github.com/sandeep-kalasgonda/updated-project.git
-cd updated-project
+ ## Deploying on AWS EC2 with Tomcat
+1. Clone the Repository on EC2:
+   ```bash
+   git clone https://github.com/sandeep-kalasgonda/updated-project.git
+   cd updated-project
+   
 2.Install Java 17 on EC2:
 Follow the instructions to install Java 17.
 3.Install Maven:
 Install Maven compatible with Java 17.
-4.Install Apache Tomcat 10.1:
-sudo apt-get install tomcat10
-5.Configure Tomcat:
-Edit user.xml:
-cd /etc/tomcat10
-sudo vi tomcat-users.xml
-Add user roles and permissions as required.
-Update context.xml:
-cd /var/lib/tomcat10/webapps/ROOT/META-INF
-sudo vi context.xml
-allow the manager dashboard
 
-6.Deploy the Application:
-mvn clean package
-cp target/project.war /var/lib/tomcat10/webapps/
-7.Start Tomcat:
-sudo systemctl start tomcat10
+4. Install Apache Tomcat 10.1:
+   ```bash
+   sudo apt-get install tomcat10
+5. Configure Tomcat:
+Edit user.xml:
+   ```bash
+   cd /etc/tomcat10
+   sudo vi tomcat-users.xml
+   Add user roles and permissions as required.
+   Update context.xml:
+      cd /var/lib/tomcat10/webapps/ROOT/META-INF
+      sudo vi context.xml
+      allow the manager dashboard
+
+6. Deploy the Application:
+   ```bash
+   mvn clean package
+   cp target/project.war /var/lib/tomcat10/webapps/
+7. Start Tomcat:
+   ```bash
+   sudo systemctl start tomcat10
 8.Access the Application:
 
 Visit http://<ec2-public-ip>:8080/project to access the application.
@@ -110,16 +119,23 @@ Ensure the EC2 instance security group allows inbound traffic on port 8080.
 ### Containerizing the Application with Docker
 Dockerize the Application:
 
-1.Create a Dockerfile in the project root:(use project docker file)
-2.Build the Docker Image:
-docker build -t carservice:latest .
-3.Run the Docker Container Locally:
-docker run -p 8080:8080 carservice:latest
+### Containerizing the Application with Docker
+
+1. **Create a Dockerfile in the Project Root:**
+   Use the provided Dockerfile to define the application environment and dependencies.
+
+2. **Build the Docker Image:**
+   ```bash
+   docker build -t carservice:latest .
+
+3. Run the Docker Container Locally:
+   ```bash
+   docker run -p 8080:8080 carservice:latest
 Access the application at http://localhost:8080.
 
 
 
-### Pushing the Docker Image to AWS ECR
+Pushing the Docker Image to AWS ECR
 1.Create an AWS ECR Repository:
 
 -Create an ECR repository via the AWS Management Console.
@@ -135,7 +151,7 @@ docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/carservice:latest
 
 
 
-### Deploying with AWS Elastic Load Balancer (ELB) and Route 53
+Deploying with AWS Elastic Load Balancer (ELB) and Route 53
 Set Up Elastic Load Balancer:
 
 Create a new load balancer in the AWS EC2 console.
@@ -153,7 +169,7 @@ Test the Deployment:
 After DNS propagation, access the application via the subdomain configured in Route 53.
 
 
-### DevOps End-to-End Project Overview
+ DevOps End-to-End Project Overview
 This project showcases a complete DevOps pipeline from development to deployment, demonstrating the following key areas:
 
 Development: Application development using Spring Boot and Java 17.
@@ -170,7 +186,7 @@ License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-### Final Notes:
+Final Notes:
 
 - Ensure that the placeholders like `<your-username>`, `<your-password>`, `<aws_account_id>`, and `<region>` are replaced with actual values relevant to your environment.
 - You can add monitoring and logging tools such as AWS CloudWatch to the project to make it even more comprehensive.
